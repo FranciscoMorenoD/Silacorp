@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SILACORP - Cursos de Brigadas de Emergencia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Importación de fuentes de Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap');
+
+        /* Definición de variables CSS para colores */
+        :root {
+            --primary-red: #E44D26; /* Un rojo vibrante */
+            --secondary-white: #FFFFFF;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --form-bg: #F9F9F9;
+            --border-color: #DDDDDD;
+        }
+
+        /* Estilos generales del cuerpo de la página */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: var(--secondary-white);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Estilos del encabezado */
+        header {
+            background-color: var(--primary-red);
+            color: var(--secondary-white);
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Contenido del encabezado (logo y título) */
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Estilo del logo */
+        .logo {
+            width: 150px; /* Ancho del logo */
+            height: auto; /* Altura automática para mantener la proporción */
+            max-width: 100%; /* Asegura que el logo sea responsivo y no se desborde */
+            margin-bottom: 15px;
+            border-radius: 8px; /* Bordes ligeramente redondeados para el logo */
+        }
+
+        /* Estilo del título principal (H1) */
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5em; /* Tamaño de fuente grande y llamativo */
+            margin: 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Estilos de la barra de navegación */
+        nav {
+            background-color: var(--text-dark);
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        /* Estilos de los enlaces de navegación */
+        nav a {
+            color: var(--secondary-white);
+            text-decoration: none;
+            padding: 10px 20px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+            border-radius: 5px; /* Bordes redondeados para los enlaces */
+        }
+
+        /* Efecto hover en los enlaces de navegación */
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Contenedor principal de secciones */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Estilos generales para las secciones */
+        section {
+            background-color: var(--secondary-white);
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 10px; /* Bordes redondeados para las secciones */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Sombra suave */
+        }
+
+        /* Estilos de los títulos de sección (H2) */
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-red);
+            font-size: 2.5em;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Línea decorativa debajo de los títulos H2 */
+        h2::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-red);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -10px;
+            border-radius: 2px;
+        }
+
+        /* Estilos de los subtítulos (H3) */
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-red);
+            font-size: 1.8em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        /* Estilos para párrafos en secciones informativas */
+        .institutional-info p, .course-objective p {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            color: var(--text-light);
+        }
+
+        /* Estilos para listas en secciones informativas */
+        .institutional-info ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .institutional-info ul li {
+            background-color: var(--form-bg);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 5px solid var(--primary-red); /* Borde izquierdo rojo */
+            border-radius: 5px;
+            font-size: 1.1em;
+        }
+
+        /* Estilos de la sección del formulario */
+        .form-section {
+            background-color: var(--form-bg);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Grupo de formulario (label + input) */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        /* Estilo de las etiquetas del formulario */
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        /* Estilos de los campos de entrada y selección del formulario */
+        .form-group input[type="text"],
+        .form-group input[type="date"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group select,
+        .form-group textarea,
+        .form-group input[type="file"] { /* Added file input to styling */
+            width: calc(100% - 20px); /* Ajuste para padding */
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        /* Specific style for file input for better appearance */
+        .form-group input[type="file"] {
+            padding: 10px; /* Slightly less padding for file input */
+        }
+
+        /* Efecto focus en los campos del formulario */
+        .form-group input[type="text"]:focus,
+        .form-group input[type="date"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group input[type="tel"]:focus,
+        .form-group select:focus,
+        .form-group textarea:focus,
+        .form-group input[type="file"]:focus { /* Added file input to focus styling */
+            border-color: var(--primary-red);
+            outline: none;
+        }
+
+        /* Ajuste para el campo de comentarios */
+        textarea {
+            resize: vertical; /* Permite redimensionar verticalmente */
+            min-height: 100px;
+        }
+
+        /* Grupo de botones del formulario */
+        .button-group {
+            display: flex;
+            gap: 15px; /* Espacio entre botones */
+            flex-wrap: wrap; /* Permite que los botones se envuelvan en pantallas pequeñas */
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        /* Estilos generales de los botones */
+        button {
+            background-color: var(--primary-red);
+            color: var(--secondary-white);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para botones */
+        }
+
+        /* Efecto hover en los botones */
+        button:hover {
+            background-color: #C23A1B; /* Rojo más oscuro al pasar el ratón */
+            transform: translateY(-2px); /* Pequeño desplazamiento hacia arriba */
+        }
+
+        /* Estilos del mensaje de éxito/error */
+        #message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: 600;
+            display: none; /* Oculto por defecto */
+        }
+
+        /* Clase para mensajes de éxito */
+        .success {
+            background-color: #D4EDDA; /* Verde claro */
+            color: #155724; /* Verde oscuro */
+            border: 1px solid #C3E6CB;
+        }
+
+        /* Estilos del pie de página */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--secondary-white);
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Contenedor de iconos sociales */
+        .social-icons {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Estilos de los iconos sociales */
+        .social-icons a {
+            color: var(--secondary-white);
+            font-size: 2em;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        /* Efecto hover en los iconos sociales */
+        .social-icons a:hover {
+            color: var(--primary-red);
+        }
+
+        /* Estilos del botón de WhatsApp */
+        .whatsapp-button {
+            display: inline-flex; /* Permite alinear icono y texto */
+            background-color: #25D366; /* Verde de WhatsApp */
+            color: var(--secondary-white);
+            padding: 12px 25px;
+            border-radius: 30px; /* Botón redondeado */
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: 600;
+            align-items: center;
+            justify-content: center;
+            gap: 10px; /* Espacio entre icono y texto */
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Efecto hover en el botón de WhatsApp */
+        .whatsapp-button:hover {
+            background-color: #1DA851; /* Verde más oscuro al pasar el ratón */
+            transform: translateY(-2px);
+        }
+
+        /* Estilo del icono dentro del botón de WhatsApp */
+        .whatsapp-button i {
+            font-size: 1.5em;
+        }
+
+        /* Media queries para diseño responsivo en pantallas más pequeñas */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+
+            .logo {
+                width: 100px;
+            }
+
+            nav a {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+
+            .container {
+                margin: 20px auto;
+                padding: 0 15px;
+            }
+
+            section {
+                padding: 25px;
+            }
+
+            .button-group {
+                flex-direction: column; /* Botones apilados en pantallas pequeñas */
+                gap: 10px;
+            }
+
+            button {
+                width: 100%; /* Botones ocupan todo el ancho disponible */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="https://github.com/FranciscoMorenoD/Silacorp/blob/main/ChatGPT%20Image%2026%20may%202025,%2016_58_04.png?raw=true" alt="Logo de SILACORP" class="logo">
+            <h1>SILACORP</h1>
+            <p>Formando Líderes en Seguridad y Emergencias</p>
+        </div>
+    </header>
+
+    <nav>
+        <a href="#about">Quiénes Somos</a>
+        <a href="#courses">Cursos</a>
+        <a href="#inscription">Inscripción</a>
+        <a href="#contact">Contacto</a>
+    </nav>
+
+    <div class="container">
+        <section id="about" class="institutional-info">
+            <h2>Quiénes Somos</h2>
+            <p>SILACORP es una organización dedicada a la capacitación integral en seguridad y manejo de emergencias, con un firme compromiso con la prevención y respuesta ante situaciones críticas. Contamos con el respaldo y la experiencia de **Cruz Roja Mexicana**, garantizando la calidad y validez de nuestros programas de formación.</p>
+            <h3>Nuestra Misión</h3>
+            <ul>
+                <li>Formar brigadistas y personal capacitado con los más altos estándares de calidad, ética y profesionalismo, para salvaguardar vidas y bienes.</li>
+            </ul>
+            <h3>Nuestra Visión</h3>
+            <ul>
+                <li>Ser la institución líder a nivel nacional en la capacitación de brigadas de emergencia, reconocida por nuestra excelencia, innovación y contribución a una sociedad más segura y preparada.</li>
+            </ul>
+            <h3>Nuestros Valores</h3>
+            <ul>
+                <li>**Compromiso:** Con la seguridad y el bienestar de las personas.</li>
+                <li>**Solidaridad:** Apoyo incondicional en momentos de necesidad.</li>
+                <li>**Excelencia:** Búsqueda constante de la calidad en nuestra formación.</li>
+                <li>**Respeto:** Hacia la vida, la diversidad y el medio ambiente.</li>
+                <li>**Integridad:** Actuar con honestidad y transparencia.</li>
+            </ul>
+        </section>
+
+        <section id="courses" class="course-objective">
+            <h2>Nuestros Cursos</h2>
+            <p>Ofrecemos una variedad de cursos especializados, diseñados para equiparte con las habilidades necesarias para actuar eficazmente en situaciones de emergencia. Nuestros programas están actualizados y son impartidos por instructores altamente calificados.</p>
+            <h3>Objetivo del Curso de Brigadas de Emergencia</h3>
+            <p>Capacitar a los participantes con los conocimientos teóricos y prácticos esenciales para la conformación y operación de brigadas de emergencia, permitiéndoles identificar riesgos, prevenir accidentes y actuar de manera organizada y eficiente ante incendios, sismos, primeros auxilios, evacuación y rescate, minimizando así el impacto de cualquier contingencia.</p>
+            </section>
+
+        <section id="inscription" class="form-section">
+            <h2>Formulario de Inscripción al Curso</h2>
+            <form id="inscriptionForm">
+                <div class="form-group">
+                    <label for="nombre">Nombre Completo:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+                    <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="curso">Selecciona el Curso:</label>
+                    <select id="curso" name="curso" required>
+                        <option value="">-- Selecciona un curso --</option>
+                        <option value="Brigadas de Emergencia">Brigadas de Emergencia</option>
+                        <option value="Primeros Auxilios Avanzados">Primeros Auxilios Avanzados</option>
+                        <option value="Combate de Incendios">Combate de Incendios</option>
+                        <option value="Evacuación y Rescate">Evacuación y Rescate</option>
+                        <option value="Gestión de Riesgos">Gestión de Riesgos</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="modalidad">Modalidad del Curso:</label>
+                    <select id="modalidad" name="modalidad" required>
+                        <option value="">-- Selecciona modalidad --</option>
+                        <option value="Presencial">Presencial</option>
+                        <option value="Virtual">Virtual</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono">Teléfono (10 dígitos):</label>
+                    <input type="tel" id="telefono" name="telefono" pattern="[0-9]{10}" maxlength="10" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="estado">Estado de México:</label>
+                    <select id="estado" name="estado" required>
+                        <option value="">-- Selecciona tu estado --</option>
+                        <option value="Aguascalientes">Aguascalientes</option>
+                        <option value="Baja California">Baja California</option>
+                        <option value="Baja California Sur">Baja California Sur</option>
+                        <option value="Campeche">Campeche</option>
+                        <option value="Chiapas">Chiapas</option>
+                        <option value="Chihuahua">Chihuahua</option>
+                        <option value="Ciudad de México">Ciudad de México</option>
+                        <option value="Coahuila">Coahuila</option>
+                        <option value="Colima">Colima</option>
+                        <option value="Durango">Durango</option>
+                        <option value="Estado de México">Estado de México</option>
+                        <option value="Guanajuato">Guanajuato</option>
+                        <option value="Guerrero">Guerrero</option>
+                        <option value="Hidalgo">Hidalgo</option>
+                        <option value="Jalisco">Jalisco</option>
+                        <option value="Michoacán">Michoacán</option>
+                        <option value="Morelos">Morelos</option>
+                        <option value="Nayarit">Nayarit</option>
+                        <option value="Nuevo León">Nuevo León</option>
+                        <option value="Oaxaca">Oaxaca</option>
+                        <option value="Puebla">Puebla</option>
+                        <option value="Querétaro">Querétaro</option>
+                        <option value="Quintana Roo">Quintana Roo</option>
+                        <option value="San Luis Potosí">San Luis Potosí</option>
+                        <option value="Sinaloa">Sinaloa</option>
+                        <option value="Sonora">Sonora</option>
+                        <option value="Tabasco">Tabasco</option>
+                        <option value="Tamaulipas">Tamaulipas</option>
+                        <option value="Tlaxcala">Tlaxcala</option>
+                        <option value="Veracruz">Veracruz</option>
+                        <option value="Yucatán">Yucatán</option>
+                        <option value="Zacatecas">Zacatecas</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="comentarios">Comentarios:</label>
+                    <textarea id="comentarios" name="comentarios" required></textarea> </div>
+
+                <div class="form-group">
+                    <label for="cvFile">Adjuntar CV (PDF, DOC, DOCX):</label>
+                    <input type="file" id="cvFile" name="cvFile" accept=".pdf,.doc,.docx" required> </div>
+
+                <div class="button-group">
+                    <button type="submit" id="generateInscription">Generar Inscripción</button>
+                    <button type="button" id="exportReceipt">Exportar Recibo (PDF)</button>
+                </div>
+
+                <div id="message" class="success"></div>
+            </form>
+        </section>
+
+        <section id="contact">
+            <h2>Contáctanos</h2>
+            <p>Si tienes alguna pregunta o necesitas más información, no dudes en contactarnos a través de nuestras redes sociales o directamente por WhatsApp.</p>
+            <div class="whatsapp-button-container" style="text-align: center;">
+                <a href="https://wa.me/521XXXXXXXXXX" target="_blank" class="whatsapp-button">
+                    <i class="fab fa-whatsapp"></i> Envíanos un WhatsApp
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 SILACORP. Todos los derechos reservados.</p>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/silacorp" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/silacorp" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@silacorp" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.linkedin.com/company/silacorp" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        // Obtener referencias a los elementos del DOM
+        const inscriptionForm = document.getElementById('inscriptionForm');
+        const messageDiv = document.getElementById('message');
+        const telefonoInput = document.getElementById('telefono');
+        const exportReceiptButton = document.getElementById('exportReceipt');
+        const cvFileInput = document.getElementById('cvFile'); // Reference to the new CV file input
+
+        // Limitar la entrada del número de teléfono a 10 dígitos
+        telefonoInput.addEventListener('input', function (e) {
+            if (this.value.length > 10) {
+                this.value = this.value.slice(0, 10);
+            }
+        });
+
+        // Manejar el envío del formulario
+        inscriptionForm.addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevenir el envío por defecto del formulario
+
+            // Obtener los datos del formulario
+            const nombre = document.getElementById('nombre').value;
+            const fechaNacimiento = document.getElementById('fechaNacimiento').value;
+            const curso = document.getElementById('curso').value;
+            const modalidad = document.getElementById('modalidad').value;
+            const telefono = document.getElementById('telefono').value;
+            const email = document.getElementById('email').value;
+            const estado = document.getElementById('estado').value;
+            const comentarios = document.getElementById('comentarios').value; // Comentarios field is now required
+            const cvFile = cvFileInput.files[0]; // Get the attached CV file (now required)
+
+            // Validación básica de campos obligatorios
+            // All fields are now marked as 'required' in HTML, so browser's native validation will handle most cases.
+            // This JavaScript check serves as a fallback and for consistency.
+            if (!nombre || !fechaNacimiento || !curso || !modalidad || !telefono || !email || !estado || !comentarios || !cvFile) {
+                messageDiv.textContent = "Por favor, completa todos los campos obligatorios, incluyendo el CV.";
+                messageDiv.className = "success"; // Using success class for now, ideally an error class
+                messageDiv.style.display = 'block';
+                return; // Stop execution if any required field is empty
+            }
+
+            // In a real application, here you would handle the file upload.
+            // This client-side script cannot directly process file uploads to a server.
+            // You would typically use FormData and a fetch() or XMLHttpRequest to send the file.
+            if (cvFile) {
+                console.log("CV adjuntado:", cvFile.name, cvFile.type, cvFile.size, "bytes");
+                // Example of how you might send it to a server (requires a backend endpoint):
+                /*
+                const formData = new FormData();
+                formData.append('nombre', nombre);
+                formData.append('fechaNacimiento', fechaNacimiento);
+                // ... append other form fields
+                formData.append('cvFile', cvFile);
+
+                fetch('/api/inscripcion', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    messageDiv.textContent = "¡Se ha inscrito correctamente!";
+                    messageDiv.className = "success";
+                    messageDiv.style.display = 'block';
+                    inscriptionForm.reset();
+                    setTimeout(() => { messageDiv.style.display = 'none'; }, 5000);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    messageDiv.textContent = "Hubo un error al procesar la inscripción.";
+                    messageDiv.className = "success"; // Should be an error class
+                    messageDiv.style.display = 'block';
+                });
+                */
+            }
+
+            messageDiv.textContent = "¡Se ha inscrito correctamente!";
+            messageDiv.className = "success"; // Aplicar estilo de éxito
+            messageDiv.style.display = 'block'; // Mostrar el mensaje
+
+            // Limpiar el formulario después de la inscripción exitosa
+            inscriptionForm.reset();
+
+            // Ocultar el mensaje después de unos segundos
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 5000); // 5 segundos
+        });
+
+        // Manejar el clic en el botón "Exportar Recibo (PDF)"
+        exportReceiptButton.addEventListener('click', function () {
+            // Obtener los datos del formulario para el recibo
+            const nombre = document.getElementById('nombre').value;
+            const fechaNacimiento = document.getElementById('fechaNacimiento').value;
+            const curso = document.getElementById('curso').value;
+            const modalidad = document.getElementById('modalidad').value;
+            const telefono = document.getElementById('telefono').value;
+            const email = document.getElementById('email').value;
+            const estado = document.getElementById('estado').value;
+            const comentarios = document.getElementById('comentarios').value; // Comentarios field is now required
+            const cvFile = cvFileInput.files[0]; // Get the attached CV file (now required)
+
+            // Validar que los campos obligatorios estén llenos antes de generar el PDF
+            if (!nombre || !fechaNacimiento || !curso || !modalidad || !telefono || !email || !estado || !comentarios || !cvFile) {
+                // Usar un modal o un mensaje en la página en lugar de alert()
+                // Para este ejemplo, se usa alert() para la demostración, pero se recomienda una UI personalizada
+                alert("Por favor, complete todos los campos obligatorios del formulario, incluyendo el CV, antes de generar el recibo.");
+                return;
+            }
+
+            // Usar jsPDF para generar el documento PDF
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Título del recibo
+            doc.setFontSize(22);
+            doc.setTextColor('#E44D26'); // Color rojo de la marca
+            doc.text("Recibo de Inscripción - SILACORP", 105, 30, null, null, "center");
+
+            // Fecha de generación del recibo
+            doc.setFontSize(12);
+            doc.setTextColor('#333333');
+            doc.text("Fecha de Generación: " + new Date().toLocaleDateString(), 10, 50);
+
+            // Línea separadora
+            doc.setDrawColor('#E44D26');
+            doc.setLineWidth(0.5);
+            doc.line(10, 55, 200, 55); // Línea horizontal
+
+            // Datos de la inscripción
+            doc.setFontSize(14);
+            doc.setTextColor('#333333');
+            let yOffset = 70; // Posición inicial vertical
+            const lineSpacing = 10; // Espaciado entre líneas
+
+            doc.text("Datos de la Inscripción:", 10, yOffset);
+            yOffset += lineSpacing;
+
+            doc.setFontSize(12);
+            doc.text(`Nombre Completo: ${nombre}`, 10, yOffset);
+            yOffset += lineSpacing;
+            doc.text(`Fecha de Nacimiento: ${fechaNacimiento}`, 10, yOffset);
+            yOffset += lineSpacing;
+            doc.text(`Curso Seleccionado: ${curso}`, 10, yOffset);
+            yOffset += lineSpacing;
+            doc.text(`Modalidad: ${modalidad}`, 10, yOffset);
+            yOffset += lineSpacing;
+            doc.text(`Teléfono: ${telefono}`, 10, yOffset);
+            yOffset += lineSpacing;
+            doc.text(`Email: ${email}`, 10, yOffset);
+            yOffset += lineSpacing;
+            doc.text(`Estado: ${estado}`, 10, yOffset);
+            yOffset += lineSpacing;
+            doc.text(`Comentarios: ${comentarios || 'N/A'}`, 10, yOffset); // Comentarios is now required
+            yOffset += lineSpacing;
+            // Add a line for CV attachment status (since the file itself is not embedded)
+            const cvFileName = cvFileInput.files[0] ? cvFileInput.files[0].name : 'No adjuntado';
+            doc.text(`CV Adjunto: ${cvFileName}`, 10, yOffset);
+            yOffset += lineSpacing * 2; // Espacio extra antes del mensaje final
+
+            // Mensaje de agradecimiento
+            doc.setFontSize(10);
+            doc.setTextColor('#666666');
+            doc.text("Gracias por inscribirte a nuestros cursos. Nos pondremos en contacto contigo a la brevedad.", 105, yOffset, null, null, "center");
+
+            // Guardar el documento PDF
+            doc.save("recibo_inscripcion_SILACORP.pdf");
+        });
+    </script>
+</body>
+</html>
